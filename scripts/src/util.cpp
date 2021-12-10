@@ -35,3 +35,15 @@ std::string getWorkingDirectory()
     std::string buffer2(buffer);
     return buffer2;
 }
+
+std::vector<std::string> split(std::string str, char delim) {
+    vector<string> strings;
+    istringstream f(str.c_str());
+    string s;    
+    while (getline(f, s, delim)) {
+        cout << s << endl;
+        strings.push_back(s);
+    }
+
+    return strings;
+}

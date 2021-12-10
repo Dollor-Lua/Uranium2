@@ -1,7 +1,8 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <iostream>
+#include <vector>
+#include <sstream>
 
 #ifdef _WIN32
 #include <direct.h>
@@ -14,3 +15,4 @@ using namespace std;
 bool fileExists(string filepath);
 std::string readfile(string filepath);
 std::string getWorkingDirectory();
+std::vector<std::string> split(std::string str, char delim);
