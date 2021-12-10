@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Uranium</title>
+
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" id="colorTheme" href="styles/dark.css">
+
+        <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css" />
+        <script src="../node_modules/xterm/lib/xterm.js"></script>
+        
+        <script defer src="js/main.js" type="module"></script>
+    </head>
+    <body>
+        <main class="titlebar">
+            <div id="tools"></div>
+            <div id="buttons">
+                <button onclick="window.uranium.close()" id="close" style="font-size: 110%;">✕</button>
+                <button onclick="window.uranium.maximize()" id="maximize" class="transparency-hover" style="font-size: 110%; padding-top: 5px;padding-left: 5px;">▢</button>
+                <button onclick="window.uranium.minimize()" id="minimize" class="transparency-hover" style="font-size: 100%;">—</button>
+            </div>
+            <div id="draggable"></div>
+            <p id="title">Uranium</p>
+        </main>
+        <primary>
+            <div id="terminals">
+                <div id="terminal-container">
+                    <div id="terminal"></div>
+                </div>
+            </div>
+        </primary>
+    </body>
+</html>

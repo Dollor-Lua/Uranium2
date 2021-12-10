@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+main {
+    width: 100%;
+    position: absolute;
+    height: 30px;
+    left: 0px;
+    top: 0px;
+}
+
+primary {
+    top: 30px;
+    position: absolute;
+}
+
+#minimize,
+#maximize,
+#close {
+    width: 45px;
+    height: 30px;
+    float: right;
+    border: none;
+    outline: none;
+    background-color: #0000;
+    -webkit-app-region: no-drag;
+}
+
+#close:hover {
+    background-color: #ee0000;
+    color: #fff;
+}
+
+#minimize {
+    left: calc(100% - 90px);
+}
+
+#maximize {
+    left: calc(100% - 45px);
+}
+
+#close {
+    left: 100%;
+}
+
+#draggable {
+    -webkit-user-drag: auto;
+    overflow: auto;
+    float: center;
+    height: 100%;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+}
+
+#title {
+    width: fit-content;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 5px;
+    text-align: center;
+    align-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0px;
+    font-size: 1.1rem;
+}

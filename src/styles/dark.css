@@ -1,0 +1,32 @@
+body {
+    background-color: #222225;
+    color: #fff;
+}
+
+button {
+    color: #ccc;
+}
+
+.titlebar {
+    background-color: #121215;
+}
+
+.text {
+    color: #fff;
+}
+
+.match {
+    color: #fff;
+}
+
+.alpha-match {
+    color: #ffffff33;
+}
+
+.transparency-hover {
+    background-color: #0000;
+}
+
+.transparency-hover:hover {
+    background-color: #ffffff33 !important;
+}
