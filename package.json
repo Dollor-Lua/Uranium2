@@ -1,7 +1,7 @@
 {
   "name": "uranium2",
   "productName": "Uranium",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "My Electron application description",
   "main": "src/index",
   "entry": "src/index.js",
@@ -9,9 +9,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "maker-tk": "cd build && cmake ../scripts && make && cd ..",
-    "maker-tk1": "cd build && cmake ../scripts && ../mk && cd .."
+    "publish": "electron-forge publish"
   },
   "keywords": [],
   "author": {
