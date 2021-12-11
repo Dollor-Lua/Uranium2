@@ -1,0 +1,7 @@
+{
+    "r": "run",
+    "v": "version",
+    "-v": "version",
+    "--version": "version",
+    "h": "help"
+}

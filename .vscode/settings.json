@@ -1,9 +1,1 @@
-{
-    "cmake.configureOnOpen": true,
-    "cmake.sourceDirectory": "${workspaceFolder}/scripts",
-    "files.associations": {
-        "*.par": "plaintext",
-        "iosfwd": "cpp",
-        "xstring": "cpp"
-    }
-}
+{}

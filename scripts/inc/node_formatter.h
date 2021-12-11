@@ -1,1 +1,0 @@
-string format_exec(string exec);

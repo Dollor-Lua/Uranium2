@@ -1,0 +1,12 @@
+{
+    "name": "uraniumtk",
+    "productName": "Uranium Toolkit",
+    "version": "1.2.1",
+    "description": "The official toolkit CLI for Uranium.",
+    "keywords": [],
+    "author": {
+        "name": "Fynotix",
+        "email": "dollorrblx@gmail.com"
+    },
+    "license": "MIT"
+}
