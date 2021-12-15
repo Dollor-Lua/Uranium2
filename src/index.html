@@ -17,6 +17,8 @@
         <script src="../node_modules/xterm-addon-unicode11/lib/xterm-addon-unicode11.js"></script>
         <script src="../node_modules/xterm-addon-search/lib/xterm-addon-search.js"></script>
         
+        <script src="//unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
+
         <script defer src="js/main.js" type="module"></script>
     </head>
     <body>
@@ -31,6 +33,12 @@
             <p id="title">Uranium</p>
         </main>
         <primary>
+            <div id="overlay-container">
+                <div id="command-bar" class="disabled">
+                    <div contenteditable="true" id="command-bar-main"></div>
+                    <div id="suggestion-container"></div>
+                </div>
+            </div>
             <div id="container-top">
                 <div id="workspace"></div>
                 <div id="editor-container">
@@ -49,7 +57,7 @@
             <p id="error-info" class="bottom-left transparency-hover text"><img class="footer-image" src="../images/error_icon2.png"/>0<img class="footer-image" src="../images/warning_icon.png"/>0</p>
 
             <!-- bottom right -->
-            <p id="choice-lang" class="bottom-right transparency-hover text">Plain Text</p>
+            <p onclick="window.utk.showCommandBar('language')"id="choice-lang" class="bottom-right transparency-hover text">Plain Text</p>
             <p id="line-ending" class="bottom-right transparency-hover text">LF</p>
             <p id="spaces" class="bottom-right transparency-hover text">Spaces: 4</p>
             <p id="line-info" class="bottom-right transparency-hover text">Ln 0, Col 0</p>
