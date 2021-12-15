@@ -5,6 +5,27 @@
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: content-box;
+    min-width: 15px;
+    min-height: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #000;
+}
+
 main {
     width: 100%;
     position: absolute;
@@ -16,6 +37,52 @@ main {
 primary {
     top: 30px;
     position: absolute;
+    width: 100%;
+    height: calc(100% - 55px);
+    top: 30px;
+}
+
+footer {
+    width: 100%;
+    top: 100%;
+    height: 25px;
+    position: absolute;
+    transform: translateY(-100%);
+}
+
+.bottom-right {
+    width: fit-content;
+    height: 100%;
+    font-size: 0.9rem;
+    padding-left: 8px;
+    padding-right: 8px;
+    float: right;
+    line-height: 25px;
+}
+
+.bottom-left {
+    width: fit-content;
+    height: 100%;
+    font-size: 0.9rem;
+    padding-left: 8px;
+    padding-right: 8px;
+    float: left;
+    line-height: 25px;
+    align-content: center;
+}
+
+.footer-image {
+    width: fit-content;
+    height: 15px;
+    top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 25px;
+    position: relative;
+}
+
+.disabled {
+    display: none;
 }
 
 #minimize,
@@ -69,4 +136,92 @@ primary {
     transform: translateX(-50%);
     top: 0px;
     font-size: 1.1rem;
+}
+
+#workspace {
+    float: left;
+    width: 200px;
+    height: 100%;
+}
+
+#terminal {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: auto;
+}
+
+#terminal::-webkit-scrollbar {
+    width: 15px;
+}
+
+#terminal::-webkit-scrollbar-corner {
+    background-color: #000;
+}
+
+#terminal::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: content-box;
+    min-width: 15px;
+    min-height: 15px;
+}
+
+#terminal::-webkit-scrollbar-track {
+    background-color: #000;
+}
+
+#terminals {
+    top: 100%;
+    height: 250px;
+    transform: translateY(-100%);
+    overflow: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+#terminal-container {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 30px);
+    top: 30px;
+    overflow: hidden;
+}
+
+#terminal-container-main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+
+#container-top {
+    display: flex;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+}
+
+#editor-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#editor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+
+#main-editor div {
+    font-family: "Courier New", Courier, monospace;
 }

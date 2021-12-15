@@ -14,7 +14,7 @@ class TK extends EventEmitter {
 
     #logger = null;
     #display = null;
-    #timers = null;
+    timers = null;
     #process = null;
 
     errormsg = `\tat UraniumTK.js (${__filename})\n\t\x1b[1;30mat TKCLI.js (UTK:Core/UraniumTK/TKCLI.js)\n\tat console in ? cin (UTK:Pred:Core/console.read)\x1b[0m`;
@@ -23,9 +23,9 @@ class TK extends EventEmitter {
         super();
 
         this.command = null;
+        this.timers = new Timers();
         this.#logger = new BasicLogger();
         this.#display = new Display();
-        this.#timers = new Timers();
         this.#process = proc;
 
         this.argv = this.#process.argv;

@@ -7,6 +7,10 @@ button {
     color: #ccc;
 }
 
+footer {
+    background-color: #121215;
+}
+
 .titlebar {
     background-color: #121215;
 }
@@ -28,5 +32,13 @@ button {
 }
 
 .transparency-hover:hover {
-    background-color: #ffffff33 !important;
+    background-color: #ffffff22 !important;
+}
+
+#workspace {
+    background-color: #1f1f25;
+}
+
+#editor {
+    background-color: #0e0e11;
 }

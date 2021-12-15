@@ -1,19 +1,24 @@
-const { Terminal } = require("xterm");
-const { WebLinksAddon } = require("xterm-addon-web-links");
-const { SerializeAddon } = require("xterm-addon-serialize");
-const { Unicode11Addon } = require("xterm-addon-unicode11");
-const { SearchAddon } = require("xterm-addon-search");
-const { FitAddon } = require("xterm-addon-fit");
+import editor from "./editor/generator.js";
+import { updateSplice } from "./randutil.js";
 
-const terminal = new Terminal();
+updateSplice();
 
-// Load all terminal addons
-terminal.loadAddon(new WebLinksAddon());
-terminal.loadAddon(new SerializeAddon());
-terminal.loadAddon(new Unicode11Addon());
-terminal.loadAddon(new WebLinksAddon());
-terminal.loadAddon(new SearchAddon());
-terminal.loadAddon(new FitAddon());
+var term = new Terminal();
 
-terminal.open(document.getElementById("terminal"));
-terminal.writeln("\x1b[32mPAX CI Successfully loaded the console host.\x1b[0m");
+// apply terminal addons
+term.loadAddon(new WebLinksAddon.WebLinksAddon());
+term.loadAddon(new SerializeAddon.SerializeAddon());
+term.loadAddon(new Unicode11Addon.Unicode11Addon());
+term.loadAddon(new SearchAddon.SearchAddon());
+term.loadAddon(new FitAddon.FitAddon());
+
+term.open(document.getElementById("terminal"));
+window.uranium.onTermData((e, data) => {
+    term.write(data);
+});
+
+term.onData((e) => {
+    window.uranium.sendTermKeystroke(e);
+});
+
+var edt = new editor(document.getElementById("editor"));

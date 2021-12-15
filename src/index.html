@@ -9,6 +9,13 @@
 
         <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css" />
         <script src="../node_modules/xterm/lib/xterm.js"></script>
+
+        <!-- xterm.js addons -->
+        <script src="../node_modules/xterm-addon-web-links/lib/xterm-addon-web-links.js"></script>
+        <script src="../node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+        <script src="../node_modules/xterm-addon-serialize/lib/xterm-addon-serialize.js"></script>
+        <script src="../node_modules/xterm-addon-unicode11/lib/xterm-addon-unicode11.js"></script>
+        <script src="../node_modules/xterm-addon-search/lib/xterm-addon-search.js"></script>
         
         <script defer src="js/main.js" type="module"></script>
     </head>
@@ -24,11 +31,28 @@
             <p id="title">Uranium</p>
         </main>
         <primary>
-            <div id="terminals">
-                <div id="terminal-container">
-                    <div id="terminal"></div>
+            <div id="container-top">
+                <div id="workspace"></div>
+                <div id="editor-container">
+                    <div id="editor"></div>
+                </div>
+                <div id="terminals" class="disabled">
+                    <div id="terminal-container">
+                        <div id="terminal-container-main">
+                            <div id="terminal"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </primary>
+        <footer>
+            <p id="error-info" class="bottom-left transparency-hover text"><img class="footer-image" src="../images/error_icon2.png"/>0<img class="footer-image" src="../images/warning_icon.png"/>0</p>
+
+            <!-- bottom right -->
+            <p id="choice-lang" class="bottom-right transparency-hover text">Plain Text</p>
+            <p id="line-ending" class="bottom-right transparency-hover text">LF</p>
+            <p id="spaces" class="bottom-right transparency-hover text">Spaces: 4</p>
+            <p id="line-info" class="bottom-right transparency-hover text">Ln 0, Col 0</p>
+        </footer>
     </body>
 </html>

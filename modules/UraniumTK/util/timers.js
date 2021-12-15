@@ -23,15 +23,15 @@ class Timers {
         if (this.#running || this.#before) return;
         this.onStatusChanged.emit("started");
         this.#start = this.getTime("sec");
-        running = true;
-        before = true;
+        this.#running = true;
+        this.#before = true;
     }
 
     end() {
         if (!this.#running) return;
         this.onStatusChanged.emit("ended");
         this.#end = this.getTime("sec");
-        running = false;
+        this.#running = false;
     }
 
     getTimeDifference() {

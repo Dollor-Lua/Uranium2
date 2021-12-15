@@ -2,7 +2,7 @@ const child_process = require("child_process");
 const { existsSync } = require("fs");
 const { join } = require("path");
 
-class run {
+class exec {
     #version = "1.1.2";
     #tk = null;
 
@@ -55,30 +55,46 @@ class run {
             argus = argus.join(" ");
 
             // attempt to run an executable first, if it doesn't exist then go to npx.
-            var c;
-            c = child_process.spawn(impl[ci].split(" ")[0], argus.split(" "), { cwd: process.cwd() });
-            c.on("error", function (_e) {
-                var aa = child_process.exec(impl[ci], function (e, stdout, stderr) {
-                    if (e) {
-                        var c2;
-                        // TODO: Replace npx with a custom javascript file that searches node_modules
-                        if (process.platform === "win32") {
-                            c2 = child_process.spawn("npx.cmd", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
-                        } else {
-                            c2 = child_process.spawn("npx", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
-                        }
+            await new Promise(function (resolve, reject) {
+                var c;
+                c = child_process.spawn(impl[ci].split(" ")[0], argus.split(" "), { cwd: process.cwd() });
+                c.on("error", function (_e) {
+                    var aaerr = false;
+                    var aa = child_process.exec(impl[ci], function (e, stdout, stderr) {
+                        if (e) {
+                            aaerr = true;
+                            var c2;
+                            // TODO: Replace npx with a custom javascript file that searches node_modules
+                            if (process.platform === "win32") {
+                                c2 = child_process.spawn("npx.cmd", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
+                            } else {
+                                c2 = child_process.spawn("npx", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
+                            }
 
-                        c2.on("error", function (e2) {
-                            throw e2;
-                        });
-                    } else {
-                        if (stdout) console.log(stdout);
-                        else console.log(stderr);
-                    }
+                            c2.on("error", function (e2) {
+                                throw e2;
+                            });
+
+                            c2.on("close", function () {
+                                resolve();
+                            });
+                        } else {
+                            if (stdout) console.log(stdout);
+                            else console.log(stderr);
+                        }
+                    });
+
+                    aa.on("close", function () {
+                        if (!aaerr) resolve();
+                    });
+                });
+
+                c.on("close", function () {
+                    resolve();
                 });
             });
         }
     }
 }
 
-module.exports = run;
+module.exports = exec;

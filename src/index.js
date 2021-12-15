@@ -1,9 +1,13 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const pty = require("node-pty");
+const os = require("os");
 
 if (require("electron-squirrel-startup")) {
     app.quit();
 }
+
+const shell = os.platform() === "win32" ? "cmd.exe" : "bash";
 
 const windows = {};
 
@@ -29,6 +33,22 @@ const createWindow = () => {
 
     mainWindow.webContents.once("did-finish-load", () => {
         windows[`${mainWindow.webContents.getOSProcessId()}`] = [mainWindow, false];
+    });
+
+    var ptyProcess = pty.spawn(shell, [], {
+        name: "xterm-color",
+        cols: 80,
+        rows: 30,
+        cwd: process.env.HOME,
+        env: process.env,
+    });
+
+    ptyProcess.on("data", function (data) {
+        mainWindow.webContents.send("terminal.incomingData", data);
+    });
+
+    ipcMain.on("terminal.keystroke", (event, key) => {
+        ptyProcess.write(key);
     });
 };
 

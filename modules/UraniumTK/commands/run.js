@@ -2,6 +2,8 @@ const child_process = require("child_process");
 const { existsSync } = require("fs");
 const { join } = require("path");
 
+const exec = require(join(__dirname, "exec.js"));
+
 const truescripts = ["publish", "install", "uninstall", "test", "stop", "start", "restart", "version"];
 
 class run {
@@ -22,6 +24,7 @@ class run {
 
     async run(args) {
         const self = this;
+        self.#tk.timers.start();
         if (!existsSync(join(process.cwd(), "package.json"))) {
             this.#tk.errormsg = `No package.json file was found\n\t${this.#tk.errormsg}`;
             throw Object.assign(
@@ -61,38 +64,64 @@ class run {
         const impl = Impl.split("&&");
 
         for (var i = 0; i < impl.length; i++) {
-            self.#tk.out("\x1b[1;30m$ " + impl[i] + "\x1b[0m\n");
+            await new Promise(function (resolve, reject) {
+                self.#tk.out("\x1b[1;30m$ " + impl[i] + "\x1b[0m\n");
 
-            const ci = i;
-            var argus = impl[ci].split(" ");
+                const ci = i;
+                var argus = impl[ci].split(" ");
 
-            argus.shift();
-            argus = argus.join(" ");
+                argus.shift();
+                argus = argus.join(" ");
 
-            // attempt to run an executable first, if it doesn't exist then go to npx.
-            var c;
-            c = child_process.spawn(impl[ci].split(" ")[0], argus.split(" "), { cwd: process.cwd() });
-            c.on("error", function (_e) {
-                var aa = child_process.exec(impl[ci], function (e, stdout, stderr) {
-                    if (e) {
-                        var c2;
-                        // TODO: Replace npx with a custom javascript file that searches node_modules
-                        if (process.platform === "win32") {
-                            c2 = child_process.spawn("npx.cmd", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
+                // attempt to run an executable first, if it doesn't exist then go to npx.
+
+                var lvl = 0;
+
+                var c;
+                c = child_process.spawn(impl[ci].split(" ")[0], argus.split(" "), { cwd: process.cwd() });
+                c.on("error", function (_e) {
+                    lvl++;
+                    var aaerr = false;
+                    var aa = child_process.exec(impl[ci], function (e, stdout, stderr) {
+                        if (e) {
+                            lvl++;
+                            aaerr = true;
+                            var c2;
+                            // TODO: Replace npx with a custom javascript file that searches node_modules
+                            if (process.platform === "win32") {
+                                c2 = child_process.spawn("npx.cmd", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
+                            } else {
+                                c2 = child_process.spawn("npx", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
+                            }
+
+                            c2.on("error", function (e2) {
+                                throw e2;
+                            });
+
+                            c2.on("exit", function (e) {
+                                resolve();
+                            });
                         } else {
-                            c2 = child_process.spawn("npx", impl[ci].split(" "), { cwd: process.cwd(), stdio: "inherit" });
+                            if (stdout) console.log(stdout);
+                            else console.log(stderr);
                         }
+                    });
 
-                        c2.on("error", function (e2) {
-                            throw e2;
-                        });
-                    } else {
-                        if (stdout) console.log(stdout);
-                        else console.log(stderr);
-                    }
+                    aa.on("exit", function () {
+                        setTimeout(function () {
+                            if (!aaerr && lvl == 1) resolve();
+                        }, 100); // wait 100 ms before checking if we need to resolve
+                    });
+                });
+
+                c.on("exit", function () {
+                    if (lvl == 0) resolve();
                 });
             });
         }
+
+        self.#tk.timers.end();
+        self.#tk.out("Done in " + Math.floor(self.#tk.timers.getTimeDifference() * 1000) / 1000 + "s.");
     }
 }
 
