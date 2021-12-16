@@ -3,10 +3,11 @@
   "productName": "Uranium",
   "version": "0.0.1",
   "description": "My Electron application description",
-  "main": "src/index",
+  "main": "src/index.js",
   "entry": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
+    "startinc": "electron-forge start inc/index.js",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish"
@@ -14,17 +15,20 @@
   "keywords": [],
   "author": {
     "name": "Fynotix",
-    "email": "dollorrblx@gmail.com"
+    "email": "fynotix.dev@gmail.com"
   },
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "dir": "./inc"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "uranium2"
+            "name": "uranium2",
+            "iconUrl": "D:/Code/Breakdown Toolkit/Uranium2/images/icon.png"
           }
         },
         {
@@ -60,6 +64,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.57",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
     "@electron-forge/maker-zip": "^6.0.0-beta.57",
-    "electron": "16.0.4"
+    "electron": "16.0.4",
+    "uglify-js": "^3.14.5"
   }
 }

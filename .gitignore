@@ -92,3 +92,5 @@ build/
 # random uranium builds
 *.exe
 UraniumTK.exe
+inc/
+installer/

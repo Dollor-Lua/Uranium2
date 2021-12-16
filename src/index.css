@@ -2,8 +2,7 @@
     margin: 0;
     -webkit-user-select: none;
     user-select: none;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-        sans-serif;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -51,12 +50,15 @@ footer {
     transform: translateY(-100%);
 }
 
-#overlay-container {
+over {
     width: 100%;
-    height: 100%;
+    top: 30px;
+    height: calc(100% - 55px);
     position: absolute;
     left: 0px;
     right: 0px;
+    z-index: 5;
+    pointer-events: none;
 }
 
 .bottom-right {
@@ -238,15 +240,39 @@ footer {
 
 #command-bar {
     position: absolute;
-    width: 50%;
+    width: 75%;
     left: 50%;
-    top: 5%;
+    top: 10%;
     transform: translateX(-50%);
     height: fit-content;
     padding: 7px;
+    border-radius: 5px;
+    z-index: 5;
+}
+
+#suggestion-container div {
+    width: 100%;
+    height: 20px;
+    font-size: 15px;
+    border-bottom: 1px solid #ffffff11;
+    margin-bottom: 3px;
 }
 
 #command-bar-main {
-    width: 100%;
-    height: 30px;
+    width: calc(100% - 5px);
+    height: 25px;
+    outline: none;
+    border: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}
+
+#command-bar-main:empty:before {
+    content: "Select Choice Language";
+    color: grey;
 }

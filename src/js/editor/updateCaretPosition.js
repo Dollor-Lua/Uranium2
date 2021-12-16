@@ -1,5 +1,8 @@
-export default async function (self, element, event, key, up, mouser = false) {
-    if (!mouser && up) {
+import guiUpdater from "./guiUpdater.js";
+
+export default async function (self, element, event, key, up, mouser = false, updater = false) {
+    const clength = self ? self.lines.length : null;
+    if (!mouser && up && !updater) {
         switch (key) {
             case "ArrowRight": {
                 self.column++;
@@ -39,7 +42,7 @@ export default async function (self, element, event, key, up, mouser = false) {
                 break;
             }
             case "Enter": {
-                await self.newline();
+                await self.newline(clength + 1);
                 break;
             }
             case "LeftMouseButton": {
@@ -53,24 +56,5 @@ export default async function (self, element, event, key, up, mouser = false) {
         }
     }
 
-    self.fixIndicators();
-
-    element.innerHTML = "";
-    for (let i = 0; i < self.lines.length; i++) {
-        if (!self.lines[i]) continue;
-        const ln = document.createElement("div");
-        ln.innerText = self.lines[i];
-        element.appendChild(ln);
-    }
-
-    var lt = "1";
-    for (let i = 2; i <= element.childNodes.length; i++) {
-        lt += "\n" + i;
-    }
-
-    document.getElementById("line-number").innerText = lt;
-    document.getElementById("line-info").innerText = `Ln ${self.line + 1}, Col ${self.column + 1}`;
-
-    document.getElementById("editor-cursor").style.left = `${(self.column <= 0 ? 2 : 11) + 9.61 * self.column}px`;
-    document.getElementById("editor-cursor").style.top = `${18 * self.line}px`;
+    guiUpdater(self, element);
 }

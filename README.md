@@ -6,7 +6,7 @@
 [![Size](https://img.shields.io/github/repo-size/Dollor-Lua/Uranium2?color=red&label=Download&style=flat-square)](https://github.com/Dollor-Lua/Uranium2/releases)
 
 Welcome to the official repository of Uranium. Now, what is Uranium? Uranium is the 92nd element
-on the period table with an atomic mass of 238.02891u. Haha, just kidding, Uranium is actually an
+on the periodid table with an atomic mass of 238.02891u. Haha, just kidding, Uranium is actually an
 extensive text editor similar to `Atom.io` or `VSCode` written entirely in javascript, html, and css.
 
 Uranium was written using [Electron](https://github.com/electron/electron), and was based around all of your favorite

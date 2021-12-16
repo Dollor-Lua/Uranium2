@@ -1,5 +1,6 @@
 import editor from "./editor/generator.js";
 import { updateSplice } from "./randutil.js";
+import defaultButtonManager from "./defaultButtonManager.js";
 
 updateSplice();
 
@@ -22,3 +23,6 @@ term.onData((e) => {
 });
 
 var edt = new editor(document.getElementById("editor"));
+window.edt = edt;
+
+defaultButtonManager();
